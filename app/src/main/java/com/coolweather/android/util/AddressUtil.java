@@ -1,6 +1,7 @@
 package com.coolweather.android.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.coolweather.android.db.City;
 import com.coolweather.android.db.County;
@@ -14,7 +15,7 @@ import org.json.JSONObject;
  * Created by admin on 2017/1/17.
  */
 public class AddressUtil {
-
+    private static final String TAG = "AddressUtil";
     public static boolean handleProvinceResponse(String response) {
         if (!TextUtils.isEmpty(response)) {
             try {
@@ -24,6 +25,7 @@ public class AddressUtil {
                     Province province = new Province();
                     province.setProvinceName(provinceObject.getString("name"));
                     province.setProvinceCode(provinceObject.getInt("id"));
+                    Log.d(TAG, "handleProvinceResponse: " + province.toString());
                     province.save();
                 }
                 return true;
@@ -44,6 +46,7 @@ public class AddressUtil {
                     city.setCityName(cityObject.getString("name"));
                     city.setCityCode(cityObject.getInt("id"));
                     city.setProvinceId(provinceId);
+                    Log.d(TAG, "handleCityResponse: " + city);
                     city.save();
                 }
                 return true;
@@ -64,6 +67,7 @@ public class AddressUtil {
                     county.setCountyName(provinceObject.getString("name"));
                     county.setWeatherId(provinceObject.getString("weather_id"));
                     county.setCityId(cityId);
+                    Log.d(TAG, "handleCountyResponse: " + county);
                     county.save();
                 }
                 return true;

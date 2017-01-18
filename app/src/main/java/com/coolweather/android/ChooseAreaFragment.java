@@ -73,12 +73,14 @@ public class ChooseAreaFragment extends Fragment {
         backButton = (Button) view.findViewById(R.id.back_button);
         listView = (ListView) view.findViewById(R.id.list_view);
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, dataList);
+        listView.setAdapter(adapter);
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        queryProvinces();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
